@@ -1,0 +1,761 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tufte-Style Book (Documentation Template)
+% LaTeX Template
+% Version 1.0 (5/1/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% The Tufte-LaTeX Developers (tufte-latex.googlecode.com) 
+%
+% License:
+% Apache License (Version 2.0)
+%
+% IMPORTANT NOTE:
+% In addition to running BibTeX to compile the reference list from the .bib
+% file, you will need to run MakeIndex to compile the index at the end of the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[justified,twoside,symmetric,explicit,letterpaper]{tufte-book} % Use the tufte-book class which in turn uses the tufte-common class
+\geometry{
+left=3cm
+}
+\usepackage[most]{tcolorbox}
+\usepackage{wallpaper}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+%\hypersetup{colorlinks} % Comment this line if you don't wish to have colored links
+\usepackage{eurosym} %Euro symbolf
+\usepackage{microtype} % Improves character and word spacing
+\usepackage{wrapfig} %Wrap a figure in text. Used in margin boxes.
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{shapes,positioning}
+\usepackage[export]{adjustbox}
+\usepackage{tocloft} % Table of contents customization
+\usepackage{lipsum} % Inserts dummy text
+\usepackage{lmodern}
+\usepackage{enumerate}
+\usepackage{booktabs} % Better horizontal rules in tables
+\usepackage{subcaption} %For the subfigure environment
+\captionsetup{compatibility=false}
+
+\usepackage{array} % Table column width manipulation
+\usepackage[format=plain, font={footnotesize}]{caption}
+\setlength{\abovecaptionskip}{2pt plus 3pt minus 2pt}
+\usepackage{amsmath} %For math formatting
+\numberwithin{figure}{chapter}
+
+\usepackage{amssymb} %For blacksquares
+
+\usepackage{graphicx} % Needed to insert images into the document
+\graphicspath{{./ImagesMain/}} % Sets the default location of pictures
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio} % Improves figure scaling
+
+\usepackage{fancyvrb} % Allows customization of verbatim environments
+\fvset{fontsize=\normalsize} % The font size of all verbatim text can be changed here
+\newcommand{\hangp}[1]{\makebox[0pt][r]{(}#1\makebox[0pt][l]{)}} % New command to create parentheses around text in tables which take up no horizontal space - this improves column spacing
+\newcommand{\hangstar}{\makebox[0pt][l]{*}} % New command to create asterisks in tables which take up no horizontal space - this improves column spacing
+\usepackage{enumitem}
+%\setlist[enumerate]{wide=\parindent,topsep=0cm}
+\setlist[enumerate]{topsep=0cm}
+\setlist[enumerate,2]{label=\alph*), wide=2\parindent}
+\usepackage{xspace} % Used for printing a trailing space better than using a tilde (~) using the \xspace command
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{multicol}
+\newcommand{\monthyear}{\ifcase\month\or January\or February\or March\or April\or May\or June\or July\or August\or September\or October\or November\or December\fi\space\number\year} % A command to print the current month and year
+\usetikzlibrary{calc}
+\newcommand{\openepigraph}[2]{ % This block sets up a command for printing an epigraph with 2 arguments - the quote and the author
+\begin{fullwidth}
+\sffamily\large
+\begin{doublespace}
+\noindent\allcaps{#1}\\ % The quote
+\noindent\allcaps{#2} % The author
+\end{doublespace}
+\end{fullwidth}
+}
+
+
+\newcommand{\blankpage}{\newpage\hbox{}\thispagestyle{empty}\newpage} % Command to insert a blank page
+
+\usepackage{units} % Used for printing standard units
+
+\newcommand{\hairsp}{\hspace{1pt}} % Command to print a very short space
+\newcommand{\ie}{\textit{i.\hairsp{}e.}\xspace} % Command to print i.e.
+\newcommand{\eg}{\textit{e.\hairsp{}g.}\xspace} % Command to print e.g.
+\newcommand{\na}{\quad--} % Used in tables for N/A cells
+\newcommand{\measure}[3]{#1/#2$\times$\unit[#3]{pc}} % Typesets the font size, leading, and measure in the form of: 10/12x26 pc.
+\newcommand{\tuftebs}{\symbol{'134}} % Command to print a backslash in tt type in OT1/T1
+
+
+% This block contains a number of shortcuts used throughout the book
+\newcommand{\vdqi}{\textit{VDQI}\xspace}
+\newcommand{\ei}{\textit{EI}\xspace}
+\newcommand{\ve}{\textit{VE}\xspace}
+\newcommand{\be}{\textit{BE}\xspace}
+\newcommand{\VDQI}{\textit{The Visual Display of Quantitative Information}\xspace}
+\newcommand{\EI}{\textit{Envisioning Information}\xspace}
+\newcommand{\VE}{\textit{Visual Explanations}\xspace}
+\newcommand{\BE}{\textit{Beautiful Evidence}\xspace}
+\newcommand{\TL}{Tufte-\LaTeX\xspace}
+
+%---------------Cosas que yo defino--------------------------------%
+
+
+\renewcommand{\arraystretch}{1.3} % Adding more space between rows in table
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\setcounter{tocdepth}{1}
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{20pt}}
+
+\setcounter{secnumdepth}{2}
+
+\newcommand{\margindyk}[2][0pt]{
+\marginnote[#1]{
+\begin{tcolorbox}[title=Sabías que...?]
+  \begin{wrapfigure}[3]{R}{0.1\textwidth}
+  \centering
+  \vspace*{-10pt}
+  \includegraphics[width=0.7cm]{question1}
+  \end{wrapfigure}
+  
+  #2
+\end{tcolorbox}
+}
+}
+
+\newcommand{\marginddi}[2][0pt]{
+\marginnote[#1]{
+\begin{tcolorbox}[title=Usted no lo haga]
+  \begin{wrapfigure}[3]{R}{0.1\textwidth}
+  \centering
+  \vspace*{-10pt}
+  \includegraphics[width=0.7cm]{biological}
+  \end{wrapfigure}
+  
+  #2
+\end{tcolorbox}
+}
+}
+
+\newcommand{\marginobs}[2][0pt]{
+\marginnote[#1]{
+\begin{tcolorbox}[title=Observación]
+  \begin{wrapfigure}[3]{R}{0.1\textwidth}
+  \centering
+  \vspace*{-10pt}
+  \includegraphics[width=0.7cm]{lupa}
+  \end{wrapfigure}
+  
+  #2
+\end{tcolorbox}
+}
+}
+
+\newenvironment{rayas}[1]{
+    \begin{tcolorbox}[
+    enhanced jigsaw, 
+    breakable, 
+    opacityback=0, 
+    check odd page, 
+    toggle left and right, 
+    grow to right
+    by=\marginparwidth+\marginparsep-5.7pt, 
+    toggle enlargement=evenpage,
+    left=0mm,
+    right=0mm,
+    frame hidden,
+    overlay unbroken={%
+            \draw[line width=0.2mm,black] ($(interior.north west)+(-0.25,0)$)--($(interior.north east)+(0.25,0)$);
+            \draw[line width=0.2mm,black] ($(interior.south west)+(-0.25,0)$)--($(interior.south east)+(0.25,0)$);
+        },
+    overlay first={
+            \draw[line width=0.2mm,black] ($(interior.north west)+(-0.25,0)$)--($(interior.north east)+(0.25,0)$);
+        },
+    overlay last={
+            \draw[line width=0.2mm,black] ($(interior.south west)+(-0.25,0)$)--($(interior.south east)+(0.25,0)$);
+        },
+    ]
+	\noindent \textbf{#1:}
+	}{
+    \end{tcolorbox}
+    }
+    
+\newcommand{\bsqr}{
+\hspace{0.4pt}
+\scalebox{0.4}{$\blacksquare$}
+\hspace{2pt}
+}
+
+\newtcolorbox{complec}{
+    enhanced jigsaw, 
+    breakable, 
+    opacityback=0,
+    check odd page, 
+    toggle left and right, 
+    grow to right by=\marginparwidth+\marginparsep-5.7pt, 
+    toggle enlargement=evenpage,
+    left=2mm,
+    right=2mm,
+    top=2mm,
+    bottom=2mm,
+    frame hidden,
+    overlay unbroken={%
+            
+            \draw[line width=0.2mm,black] (title.north west)--(title.north east);
+            \draw[line width=0.2mm,black] (interior.north west)--(interior.north east);
+            \draw[line width=0.2mm,black] (interior.south west)--(interior.south east);
+        },
+    overlay first={
+            \draw[line width=0.2mm,black] (title.north west)--(title.north east);
+            \draw[line width=0.2mm,black] (interior.north west)--(interior.north east);
+        },
+    overlay last={
+            \draw[line width=0.2mm,black] (interior.south west)--(interior.south east);
+        },
+    title=
+    {\begin{center}
+        \begin{minipage}{0.1\textwidth}
+            \includegraphics[width=0.6cm]{comprensionlectora}
+        \end{minipage}
+        \begin{minipage}{0.5\textwidth}
+            \centering
+            \textsl{Comprensión lectora}
+        \end{minipage}
+        \begin{minipage}{0.1\textwidth}
+            \centering
+            \includegraphics[width=0.6cm]{comprensionlectora}
+        \end{minipage}
+    \end{center}},
+    coltitle=black
+}
+
+
+\newcounter{nejerci}[chapter]
+
+\newcommand{\nejer}{
+
+    \stepcounter{nejerci}
+    \item[\arabic{nejerci}.]
+}
+
+\newcounter{nfigure}[chapter]
+
+\newcommand{\nfig}{
+    \stepcounter{nfigure}
+    Figura \thechapter.\arabic{nfigure}:
+}
+
+
+\tcbset{rightanswers/.style={
+    breakable,
+    enhanced,
+    outer arc=0pt,
+    arc=0pt,
+    %frame hidden=false,
+    colframe=black,
+    colback=white,
+    coltitle=black,
+    check odd page, 
+    toggle left and right, 
+    grow to right by=\marginparwidth+\marginparsep-5.7pt, 
+    toggle enlargement=evenpage,
+    attach boxed title to top center={
+    xshift=0mm, yshift=-0.4mm},
+    boxed title style={
+    colback=black!15,
+    top=3pt,
+    bottom=3pt,
+    boxrule=0.5mm,
+    sharp corners = south
+    },
+    fonttitle=\sffamily
+  }
+}
+
+\newtcolorbox{respcorrectas}[1][]{
+    rightanswers,
+    title=Alternativas Correctas,
+}
+
+\newcommand\alter[2][]{\tikz[overlay]\node[fill=black!15,inner sep=2pt, anchor=text, circle,#1] {#2};\phantom{#2}}
+
+% 'objetivo' Environment Definition
+% Image Underlay Set on Top Right of the TCB
+\tcbset{objective/.style={%
+enhanced,
+underlay={%
+\begin{tcbclipinterior}
+    \begin{scope}[opacity=0.2]
+        \node[anchor=north]
+         at ($(interior.north east)+(-1.2,0)$) {%
+        \includegraphics[%
+        width=1.5cm]{objective.png}};
+    \end{scope}
+
+\end{tcbclipinterior}
+    }
+}}
+% Styling and Definirion of the Environment
+\newtcolorbox{objetivo}{
+    objective,
+    enhanced,
+    colback=white,
+    colframe=black,
+    coltext=black,
+  	attach boxed title to top left={yshift=-3mm,yshifttext=-1mm},
+    fontupper=\normalsize,
+    arc=3mm,
+    boxrule=0.5mm,
+    boxsep=2mm, 	
+    fonttitle=\large\bfseries,
+    title=Objetivo PSU
+}
+
+% 'discusion' Environment Definition
+\tcbset{discussion/.style={
+    breakable,
+    enhanced,
+    frame hidden=true,
+    colframe=black,
+    colback=white,
+    coltitle=black,
+    check odd page, 
+    left=0mm,
+    right=0mm,
+    toggle left and right, 
+    toggle enlargement=evenpage,
+    attach boxed title to top left={
+    xshift=0mm},
+    boxed title style={
+    colback=black!10,
+    boxrule=0.5mm,
+    arc=4mm,
+    boxsep=0mm
+    }
+  }
+}
+
+
+\newtcolorbox{discusion}[1][]{
+    discussion,
+    overlay unbroken={
+        \draw[line width=0.2mm,black] (title.east)--($(title.east)+(5.98,0)$);
+        \draw[line width=0.2mm,black] (frame.south west)--(frame.south east);
+    },
+    overlay first={
+            \draw[line width=0.2mm,black] (title.east)--($(title.east)+(5.98,0)$);
+        },
+    overlay last={
+            \draw[line width=0.2mm,black] (frame.south west)--(frame.south east);
+    },
+    title={
+        \begin{minipage}{0.3\textwidth}
+        \centering
+           \textsl{\large\bfseries Para discutir}
+        \end{minipage}
+        \begin{minipage}{0.1\textwidth} \includegraphics[width=1cm]{paradiscutir}
+        \end{minipage}
+    },
+}
+
+
+% 'resumen' Environment Definition
+\newtcolorbox{resumen}{%
+enhanced,
+breakable, 
+attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
+colback=black!15,
+colframe=black,
+colbacktitle=white,
+title={\Large Resumen},
+fonttitle=\bfseries,
+coltitle=black,
+boxed title style={size=title,colframe=black},
+check odd page, 
+toggle left and right, 
+grow to right by=\marginparwidth+\marginparsep-5.7pt, 
+toggle enlargement=evenpage,
+}
+
+% 'breakline' Environment Definition
+\makeatletter
+\newcommand{\breakline}{
+\begin{tikzpicture}
+\path[use as bounding box] (0,0) -- (\linewidth,0);
+\draw[color=white!40!black,dashed,dash phase=2pt]
+      (0-\kvtcb@leftlower-\kvtcb@boxsep,0)--
+      (\linewidth+\kvtcb@rightlower+\kvtcb@boxsep,0);
+\end{tikzpicture}
+}
+\makeatother
+
+% 'subresumen' Environment Definition
+\newtcolorbox{subresumen}[1][uwu]{%
+enhanced,
+breakable, 
+colback=white,
+colframe=black,
+box align = top,
+equal height group = {#1}
+}
+
+% 'evaluacion' Environment Definition
+\tcbset{evaluation/.style={
+    breakable,
+    enhanced,
+    outer arc=0pt,
+    arc=0pt,
+    frame hidden=true,
+    colframe=black,
+    colback=white,
+    coltitle=black,
+    attach boxed title to top left,
+    check odd page, 
+    toggle left and right, 
+    grow to right by=\marginparwidth+\marginparsep-5.7pt, 
+    toggle enlargement=evenpage,
+    attach boxed title to top left={
+    xshift=-0.25mm},
+    boxed title style={
+    colback=black!15,
+    top=3pt,
+    bottom=3pt,
+    boxrule=0.5mm,
+    sharp corners = west
+    },
+    fonttitle=\sffamily
+  }
+}
+
+\newtcolorbox{evaluacion}[1][]{
+  evaluation,
+  title={\Large Evaluación de Unidad},
+  overlay unbroken={
+            \draw[line width=0.5mm,black] (interior.north west)--(interior.south west);
+  },
+  overlay first={
+            \draw[line width=0.5mm,black] (frame.north west)--(frame.south west);
+        },
+        overlay middle={
+        \draw[line width=0.5mm,black] (frame.north west)--(frame.south west);
+        },
+    overlay last={
+            \draw[line width=0.5mm,black] (frame.north west)--(frame.south west);
+            \draw[line width=0.5mm,black] (frame.south west)--(frame.south east);
+        },
+}
+
+%----------------------------------------------------------------------------------------
+%	Titulo
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\maketitlepage}{%maketitle redefining for centering of the title
+  \cleardoublepage
+  {%
+  \sffamily
+  \begin{fullwidth}%
+  \fontsize{18}{20}\selectfont\par\noindent\textcolor{darkgray}{\allcaps\thanklessauthor}%
+  \vspace{11.5pc}%
+  \begin{center}
+  \fontsize{36}{40}\selectfont\par\noindent\textcolor{darkgray}{\allcaps\thanklesstitle}%
+  \end{center}
+  \vfill
+  \fontsize{14}{16}\selectfont\par\noindent\allcaps\thanklesspublisher%
+  \end{fullwidth}%
+  }%
+  \thispagestyle{empty}%
+  \clearpage
+}
+
+\title[L\'imites, Derivadas e Integrales]{L\'imites, Derivadas e Integrales}
+
+\author{Autor} % Author
+
+\publisher{Autor} % Publisher
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\frontmatter
+
+
+%----------------------------------------------------------------------------------------
+
+
+
+
+
+\maketitle % Print the title page
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+\begin{fullwidth}
+~\vfill
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+
+\begin{Large}L\'IMITES, DERIVADAS E INTEGRALES 2020\end{Large}\bigskip
+
+
+\par\textbf{AUTORÍA}\medskip
+
+
+
+\par\textbf{DISEÑO Y DIAGRAMACIÓN}\medskip
+
+
+
+\par\textbf{EDICIÓN}\medskip
+
+
+
+
+
+%\includegraphics[width=3cm]{cc}  \medskip
+
+%\copyright \hspace{0.2cm} El presente documento está licenciado bajo la licencia Creative Commons Reconocimiento 3.0 Unported, bajo las siguientes condiciones:\smallskip 
+
+%\noindent\textbf{Reconocimiento -- No Comercial -- Compartir Igual [by - nc - sa]:} No se permite el uso, comercial ni de la obra original ni de sus derivadas, la distribución de las cuales debe hacerse con la misma licencia que la obra original. 
+
+
+
+\par\smallcaps{Publicado por \thanklesspublisher}
+
+\par\textit{Primera edición, Enero 2020}
+
+\end{fullwidth}
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	PÁGINA DE DEDICACIÓN
+%----------------------------------------------------------------------------------------
+
+\cleardoublepage
+~\vfill
+\begin{fullwidth}
+\begin{doublespace}
+\noindent\fontsize{18}{22}\selectfont\itshape
+\nohyphenation
+\begin{flushright}
+Dedicado
+\end{flushright}
+\end{doublespace}
+\end{fullwidth}
+\vfill
+\vfill
+
+%----------------------------------------------------------------------------------------
+%	PAGINA DE PRESENTACION
+%----------------------------------------------------------------------------------------
+
+\clearpage
+
+
+{\noindent\fontsize{30}{32}\selectfont Presentación \par}
+
+\bigskip
+
+\begin{fullwidth}
+\noindent \textbf{En este  libro...}\medskip
+\end{fullwidth}
+
+\pagebreak
+
+\begin{fullwidth}
+%----------------------------------------------------------------------------------------------
+%    Indice
+%---------------------------------------------------------------------------------------------
+\renewcommand{\cftchapfont}{Unidad \scshape}
+\renewcommand\cftchapafterpnum{\par\addvspace{-1pt}}
+\renewcommand\cftsecafterpnum{\par\addvspace{0pt}}
+%\cleardoublepage
+\tableofcontents % Print the table of contents
+\addtocontents{toc}{~\hfill\textbf{Página}\par}
+\end{fullwidth}
+%--------------------------------------------------------------------------Chapter/Section/Subsection/Subsubsection Styles Definition ------------------------------------------------------%
+
+%Chapter format
+%% Command to hold chapter illustration image
+\newcommand\chapterillustration{}
+\newcommand\chapterwatermark{}
+
+%% Define how the chapter title is printed
+\titleformat{\chapter}{}{}{0pt}{
+%% Background image at top of page
+\ThisULCornerWallPaper{1}{\chapterillustration}
+%% Draw a semi-transparent rectangle across the top
+\tikz[overlay,remember picture]
+  \fill[blue!80!white,opacity=.7]
+  (current page.north west) rectangle 
+  ([yshift=-3cm] current page.north east);
+  %% "logo" image at lower right
+  %% corner; Chapter number printed near spine
+  %% edge (near the left); chapter title printed
+  %% near outer edge (near the right).
+  \tikz[remember picture,overlay] \node[opacity=0.25,inner sep=0pt,xshift=-30mm,yshift=35mm] at (current page.south east){\includegraphics[width=5cm]{\chapterwatermark}};
+  \begin{tikzpicture}[overlay,remember picture]
+  \node[anchor=south west,
+  xshift=20mm,yshift=-30mm,
+  font=\sffamily\bfseries\scshape\huge] 
+  at (current page.north west) 
+  {Unidad\ \thechapter};
+  \node[fill=blue!80!black,text=white,
+  font=\Huge\bfseries, 
+  inner ysep=12pt, inner xsep=20pt,
+  rounded rectangle,anchor=east, 
+  xshift=-10mm,yshift=-30mm,align=right] 
+  at (current page.north east) {#1};
+  \end{tikzpicture}
+}
+\titlespacing*{\chapter}{0pt}{0pt}{135mm}
+
+%Section format
+\titleformat{\section}[hang]
+{\huge\bfseries}
+{\thesection\hsp\textcolor{gray75}{|}\hsp}
+{0pt}
+{\huge\bfseries #1}
+
+%Subsection format
+\titleformat{\subsection}
+{\large}
+{\thesubsection}
+{5pt}
+{\large\itshape#1}
+
+%Subsubsection format
+\renewcommand{\subsubsection}[1]{
+    \medskip\noindent\textsl{#1}\medskip
+}
+
+%----------------------------------------------------------------------------------------
+%	PRIMERA UNIDAD
+%----------------------------------------------------------------------------------------
+\mainmatter
+\setcounter{chapter}{-1}
+
+\renewcommand\chapterillustration{cover0}
+\renewcommand\chapterwatermark{logo0}
+\chapter{Preliminares}
+
+\par En este cap\'itulo...
+
+
+\begin{enumerate}[itemsep=2pt, leftmargin=10pt,itemindent=10pt]
+    \item[\textbf{0.1}] 
+    \item[\textbf{0.2}] 
+\end{enumerate}
+
+
+\label{ch:unidad0}
+\clearpage
+
+\input{unidad0}
+
+
+%----------------------------------------------------------------------------------------
+%	SEGUNDA UNIDAD
+%----------------------------------------------------------------------------------------
+\mainmatter
+\graphicspath{{./ImagesMain/}} 
+\setcounter{chapter}{0}
+
+\renewcommand\chapterillustration{cover1}
+\renewcommand\chapterwatermark{logo1}
+\chapter{L\'imites}
+
+\par En este cap\'itulo...
+
+
+\begin{enumerate}[itemsep=2pt, leftmargin=10pt,itemindent=10pt]
+    \item[\textbf{1.1}] 
+    \item[\textbf{1.2}] 
+    \end{enumerate}
+
+
+\label{ch:unidad1}
+\clearpage
+
+\input{unidad1}
+
+
+%----------------------------------------------------------------------------------------
+%	SEGUNDA UNIDAD
+%----------------------------------------------------------------------------------------
+\mainmatter
+\graphicspath{{./ImagesMain/}} 
+\setcounter{chapter}{1}
+
+\renewcommand\chapterillustration{cover2}
+\renewcommand\chapterwatermark{logo2}
+\chapter{Derivadas}
+
+\par En este cap\'itulo...
+
+
+\begin{enumerate}[itemsep=2pt, leftmargin=10pt,itemindent=10pt]
+    \item[\textbf{2.1}] 
+    \item[\textbf{2.2}] 
+    \end{enumerate}
+
+
+
+\label{ch:unidad2}
+\clearpage
+
+\input{unidad2}
+
+%----------------------------------------------------------------------------------------
+%    TERCERA UNIDAD
+%----------------------------------------------------------------------------------------
+\mainmatter
+\graphicspath{{./ImagesMain/}} 
+\setcounter{chapter}{2}
+
+\renewcommand\chapterillustration{cover3}
+\renewcommand\chapterwatermark{logo3}
+
+\chapter{Integrales}
+
+\par En este cap\'itulo...
+
+
+ \begin{enumerate}[itemsep=2pt, leftmargin=10pt,itemindent=10pt]
+     \item[\textbf{3.1}] 
+     \item[\textbf{3.2}] 
+
+\end{enumerate}
+
+
+
+\label{ch:unidad3}
+\clearpage
+
+\input{unidad3}
+
+
+
+\end{document}
